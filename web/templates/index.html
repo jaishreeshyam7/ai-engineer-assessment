@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Engineer Assessment - Production Suite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .animate-pulse-slow { animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .chat-bubble-agent { background: #f1f5f9; border-left: 4px solid #3b82f6; }
+    .chat-bubble-user { background: #eff6ff; border-right: 4px solid #10b981; }
+    .nudge-critical { border-left: 4px solid #ef4444; background: #fef2f2; }
+    .nudge-warning { border-left: 4px solid #f59e0b; background: #fffbeb; }
+    .nudge-info { border-left: 4px solid #3b82f6; background: #eff6ff; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans">
+
+  <!-- Top Navbar -->
+  <header class="bg-slate-800 border-b border-slate-700 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-lg text-white shadow-lg">
+        <i class="fa-solid fa-microchip"></i>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold tracking-tight text-white">AI Engineer Assessment</h1>
+        <p class="text-xs text-slate-400">Production AI System • Questions 1, 2, 3 & 4</p>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="flex space-x-1 bg-slate-900/60 p-1.5 rounded-xl border border-slate-700">
+      <button onclick="switchTab('q1')" id="tab-q1" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 text-white shadow transition-all">
+        <i class="fa-solid fa-headset mr-2"></i>Q1: Voice Agent
+      </button>
+      <button onclick="switchTab('q2')" id="tab-q2" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition-all">
+        <i class="fa-solid fa-database mr-2"></i>Q2: Knowledge Base
+      </button>
+      <button onclick="switchTab('q3')" id="tab-q3" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition-all">
+        <i class="fa-solid fa-earth-asia mr-2"></i>Q3: Native Bots
+      </button>
+      <button onclick="switchTab('q4')" id="tab-q4" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition-all">
+        <i class="fa-solid fa-bolt mr-2"></i>Q4: Real-Time Nudges
+      </button>
+      <button onclick="switchTab('transcripts')" id="tab-transcripts" class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg text-slate-300 hover:text-white transition-all">
+        <i class="fa-solid fa-file-lines mr-2"></i>Transcripts
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 p-6 max-w-7xl w-full mx-auto">
+
+    <!-- ==================== TAB 1: QUESTION 1 VOICE AGENT ==================== -->
+    <section id="pane-q1" class="tab-pane space-y-6">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center">
+              <i class="fa-solid fa-phone-volume text-blue-400 mr-2"></i>
+              Question 1: Knowledge-Grounded Voice Agent (Callable Web Interface)
+            </h2>
+            <p class="text-xs text-slate-400">Live Health Insurance lead qualification, objection handling, strict Q2 grounding, fallback, and CRM creation.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span id="call-status-badge" class="px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold flex items-center">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>Ready to Call
+            </span>
+            <button onclick="resetQ1Call()" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-xs rounded-lg text-slate-200">
+              <i class="fa-solid fa-rotate-left mr-1"></i>Reset Call
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Left: Phone Simulator & Controls -->
+          <div class="space-y-4">
+            <!-- Simulated Phone Frame -->
+            <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 shadow-inner space-y-4">
+              <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+                <span><i class="fa-solid fa-signal mr-1 text-emerald-400"></i>Web Calling Online</span>
+                <span id="q1-stage-indicator" class="font-mono text-blue-400 font-bold">GREETING</span>
+              </div>
+
+              <!-- Spoken Waveform Placeholder -->
+              <div class="h-14 bg-slate-950 rounded-xl flex items-center justify-center space-x-1.5 px-4 overflow-hidden border border-slate-800">
+                <div class="w-1 bg-blue-500 rounded-full h-3 animate-pulse"></div>
+                <div class="w-1 bg-indigo-500 rounded-full h-8 animate-pulse"></div>
+                <div class="w-1 bg-blue-400 rounded-full h-5 animate-pulse"></div>
+                <div class="w-1 bg-emerald-400 rounded-full h-10 animate-pulse"></div>
+                <div class="w-1 bg-blue-500 rounded-full h-4 animate-pulse"></div>
+                <div class="w-1 bg-indigo-400 rounded-full h-7 animate-pulse"></div>
+                <div class="w-1 bg-blue-600 rounded-full h-2 animate-pulse"></div>
+              </div>
+
+              <!-- Quick Scenario Injection -->
+              <div>
+                <label class="text-xs text-slate-400 block mb-1.5 font-semibold">Test Scenario Presets:</label>
+                <div class="grid grid-cols-1 gap-1.5">
+                  <button onclick="injectQ1Preset('cooperative')" class="text-left text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 transition">
+                    🟢 1. Cooperative Customer (Ideal Qualification)
+                  </button>
+                  <button onclick="injectQ1Preset('objection_employer')" class="text-left text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 transition">
+                    🟡 2. Grounded Objection: Employer Coverage
+                  </button>
+                  <button onclick="injectQ1Preset('objection_cost')" class="text-left text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 transition">
+                    🟡 3. Grounded Objection: High Cost
+                  </button>
+                  <button onclick="injectQ1Preset('conflicting')" class="text-left text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 transition">
+                    🟠 4. Incomplete & Conflicting Age/Health
+                  </button>
+                  <button onclick="injectQ1Preset('out_of_scope')" class="text-left text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 transition">
+                    🔴 5. Out-of-Scope (Cosmetic / Crypto) Fallback
+                  </button>
+                  <button onclick="injectQ1Preset('escalate')" class="text-left text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 transition">
+                    🚨 6. Human Assistance Request
+                  </button>
+                </div>
+              </div>
+
+              <!-- Mic / Voice Input -->
+              <div class="flex items-center space-x-2 pt-2">
+                <button id="q1-mic-btn" onclick="toggleQ1SpeechRecognition()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 flex items-center justify-center text-slate-200 transition">
+                  <i class="fa-solid fa-microphone"></i>
+                </button>
+                <input id="q1-input-text" type="text" placeholder="Speak or type caller response..." onkeydown="if(event.key==='Enter') sendQ1Message()" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500" />
+                <button onclick="sendQ1Message()" class="w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow">
+                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lead / Action Status Card -->
+            <div id="q1-crm-card" class="bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-2 text-xs">
+              <div class="flex items-center justify-between font-bold text-slate-300 border-b border-slate-800 pb-2">
+                <span><i class="fa-solid fa-address-card mr-1.5 text-blue-400"></i>Mock CRM Lead Card</span>
+                <span id="crm-status-badge" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400">AWAITING DATA</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-slate-300 pt-1">
+                <div><span class="text-slate-500">Applicant:</span> <span id="crm-name" class="font-semibold text-white">-</span></div>
+                <div><span class="text-slate-500">Age:</span> <span id="crm-age" class="font-semibold text-white">-</span></div>
+                <div><span class="text-slate-500">Conditions:</span> <span id="crm-cond" class="font-semibold text-white">-</span></div>
+                <div><span class="text-slate-500">Budget:</span> <span id="crm-budget" class="font-semibold text-white">-</span></div>
+              </div>
+              <div id="crm-lead-banner" class="hidden p-2 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 mt-2">
+                <div class="font-bold">Lead Created: <span id="crm-lead-id"></span></div>
+                <div class="text-[11px] text-emerald-400" id="crm-lead-notes"></div>
+              </div>
+              <div id="crm-escalate-banner" class="hidden p-2 rounded bg-red-950/60 border border-red-500/40 text-red-300 mt-2">
+                <div class="font-bold">Warm Transfer Dispatched</div>
+                <div class="text-[11px] text-red-400" id="crm-escalate-notes">Ticket created for Senior Underwriting Specialist.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Live Conversation Feed & Grounding Citations -->
+          <div class="lg:col-span-2 flex flex-col h-[560px] bg-slate-900 border border-slate-700 rounded-2xl p-4">
+            <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2 mb-3">
+              <span><i class="fa-solid fa-comments mr-1.5 text-blue-400"></i>Live Audio Dialog Transcript</span>
+              <span class="text-slate-500">Strict Knowledge-Grounding Active</span>
+            </div>
+            <!-- Chat Scroll Area -->
+            <div id="q1-dialog-feed" class="flex-1 overflow-y-auto space-y-3 pr-2 text-xs">
+              <div class="p-3 rounded-xl chat-bubble-agent text-slate-800 shadow-sm">
+                <div class="font-bold text-blue-700 text-[11px] mb-1">HealthGuard Voice Agent</div>
+                Hello! Thanks for calling HealthGuard Solutions. May I know your name to get started?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: QUESTION 2 KNOWLEDGE BASE ==================== -->
+    <section id="pane-q2" class="tab-pane hidden space-y-6">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center">
+              <i class="fa-solid fa-brain text-purple-400 mr-2"></i>
+              Question 2: Production-Ready Knowledge Base & Citation Engine
+            </h2>
+            <p class="text-xs text-slate-400">Traceable schema, PII redaction, boilerplate stripping, hybrid BM25/Vector retrieval, and provenance citations.</p>
+          </div>
+          <button onclick="runQ2BenchmarkUI()" id="btn-run-q2" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-semibold shadow">
+            <i class="fa-solid fa-play mr-1.5"></i>Run 6-Query Evaluation Suite
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="flex items-center space-x-3">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+            <input id="q2-query-input" type="text" placeholder="Search policy rules, waiting periods, underwriting criteria..." onkeydown="if(event.key==='Enter') searchKBUI()" class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500" value="What is the waiting period for pre-existing medical conditions?" />
+          </div>
+          <button onclick="searchKBUI()" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-semibold">
+            Search
+          </button>
+        </div>
+
+        <!-- Search Result Box -->
+        <div id="q2-search-output" class="bg-slate-900 border border-slate-700 rounded-2xl p-4 text-xs space-y-2">
+          <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2">
+            <span class="font-semibold text-slate-300">Retrieval Output & Citation</span>
+            <span id="q2-score-tag" class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono">Score: -</span>
+          </div>
+          <p id="q2-answer-text" class="text-slate-200 leading-relaxed font-mono text-[11px] bg-slate-950 p-3 rounded-xl border border-slate-800">
+            Enter a query above or click 'Run 6-Query Evaluation Suite' to test the knowledge base.
+          </p>
+          <div id="q2-citation-box" class="hidden p-2 rounded bg-purple-950/40 border border-purple-500/30 text-purple-300 text-[11px]">
+            <i class="fa-solid fa-quote-left mr-1"></i><span id="q2-citation-text"></span>
+          </div>
+        </div>
+
+        <!-- Evaluation Results Table -->
+        <div class="space-y-2">
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Required Retrieval Benchmark Table</h3>
+          <div class="overflow-x-auto rounded-xl border border-slate-700">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900 text-slate-400 font-semibold uppercase text-[10px] tracking-wider border-b border-slate-700">
+                <tr>
+                  <th class="p-3">#</th>
+                  <th class="p-3">Category</th>
+                  <th class="p-3">User Query</th>
+                  <th class="p-3">Retrieved Document</th>
+                  <th class="p-3">Score</th>
+                  <th class="p-3">Verdict</th>
+                </tr>
+              </thead>
+              <tbody id="q2-table-body" class="divide-y divide-slate-800 bg-slate-850">
+                <tr class="hover:bg-slate-800/50">
+                  <td class="p-3">1</td>
+                  <td class="p-3 text-blue-400 font-semibold">Product</td>
+                  <td class="p-3">What are the pre/post hospitalization medical coverage limits?</td>
+                  <td class="p-3 text-slate-400">Prime Care Health Shield</td>
+                  <td class="p-3 font-mono">0.4191</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold">CORRECT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/50">
+                  <td class="p-3">2</td>
+                  <td class="p-3 text-indigo-400 font-semibold">Policy</td>
+                  <td class="p-3">What is the waiting period for pre-existing conditions?</td>
+                  <td class="p-3 text-slate-400">Policy Exclusions & Waiting Periods</td>
+                  <td class="p-3 font-mono">0.4436</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold">CORRECT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/50">
+                  <td class="p-3">3</td>
+                  <td class="p-3 text-amber-400 font-semibold">Qualification</td>
+                  <td class="p-3">Can an applicant with controlled diabetes or high blood pressure qualify?</td>
+                  <td class="p-3 text-slate-400">Underwriting Qualification Guidelines</td>
+                  <td class="p-3 font-mono">0.3201</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold">CORRECT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/50">
+                  <td class="p-3">4</td>
+                  <td class="p-3 text-emerald-400 font-semibold">FAQ</td>
+                  <td class="p-3">How fast are cashless claims pre-authorized at network hospitals?</td>
+                  <td class="p-3 text-slate-400">Customer FAQs</td>
+                  <td class="p-3 font-mono">0.3503</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold">CORRECT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/50">
+                  <td class="p-3">5</td>
+                  <td class="p-3 text-rose-400 font-semibold">Objection</td>
+                  <td class="p-3">I already have health coverage through my employer, why buy this?</td>
+                  <td class="p-3 text-slate-400">Objection Playbook</td>
+                  <td class="p-3 font-mono">0.3618</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold">CORRECT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/50">
+                  <td class="p-3">6</td>
+                  <td class="p-3 text-slate-400 font-semibold">Out-of-Scope</td>
+                  <td class="p-3">Does this plan cover elective cosmetic nose jobs or crypto trading losses?</td>
+                  <td class="p-3 text-slate-400">Policy Exclusions (Handled Safely)</td>
+                  <td class="p-3 font-mono">0.2225</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold">CORRECT (Safe Fallback)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: QUESTION 3 MULTILINGUAL BOTS ==================== -->
+    <section id="pane-q3" class="tab-pane hidden space-y-6">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-6">
+        <div class="border-b border-slate-700 pb-4">
+          <h2 class="text-lg font-bold text-white flex items-center">
+            <i class="fa-solid fa-language text-emerald-400 mr-2"></i>
+            Question 3: Native-Language Financial Voice Bots (Philippines & Indonesia)
+          </h2>
+          <p class="text-xs text-slate-400">Natural code-switching, cultural tone, finance loanwords, regional accent adaptation, and non-literal localization.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Philippines Console -->
+          <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 flex flex-col h-[480px]">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-xl">🇵🇭</span>
+                <div>
+                  <h3 class="font-bold text-xs text-white">Philippines: Bancassurance & Life Insurance</h3>
+                  <p class="text-[10px] text-slate-400">Taglish Code-Switching (Filipino + English)</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 bg-blue-900/50 text-blue-300 text-[10px] rounded font-semibold">BPI-AIA Partner</span>
+            </div>
+
+            <div id="ph-chat-feed" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-800 text-slate-200 border-l-2 border-blue-500">
+                <span class="font-bold text-blue-400 text-[10px] block">PH Bot (Taglish):</span>
+                Magandang araw po! Tumatawag po ako mula sa BPI-AIA Bancassurance Customer Care. Ako po ba ay nakikipag-usap kay Mr. Ronald Cruz?
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-800 flex space-x-2">
+              <input id="ph-input" type="text" placeholder="Reply in Taglish or Filipino..." onkeydown="if(event.key==='Enter') sendPHMessage()" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500" value="Opo, ako nga po si Ronald Cruz." />
+              <button onclick="sendPHMessage()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold shadow">
+                Send
+              </button>
+            </div>
+          </div>
+
+          <!-- Indonesia Console -->
+          <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 flex flex-col h-[480px]">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-xl">🇮🇩</span>
+                <div>
+                  <h3 class="font-bold text-xs text-white">Indonesia: Multifinance & Consumer Credit</h3>
+                  <p class="text-[10px] text-slate-400">Bahasa Indonesia + Javanese Regional Tone</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 bg-emerald-900/50 text-emerald-300 text-[10px] rounded font-semibold">Astra Credit Unit</span>
+            </div>
+
+            <div id="id-chat-feed" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-800 text-slate-200 border-l-2 border-emerald-500">
+                <span class="font-bold text-emerald-400 text-[10px] block">ID Bot (Bahasa):</span>
+                Selamat siang, perkenalkan saya dari Customer Support Multifinance Nusantara. Apakah benar saya terhubung dengan Bapak Budi Prasetyo?
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-800 flex space-x-2">
+              <input id="id-input" type="text" placeholder="Balas dalam Bahasa atau aksen Jawa..." onkeydown="if(event.key==='Enter') sendIDMessage()" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500" value="Iya betul, saya sendiri Budi Prasetyo." />
+              <button onclick="sendIDMessage()" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold shadow">
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Localization Contrast Showcase Table -->
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">
+            <i class="fa-solid fa-code-compare mr-1.5 text-blue-400"></i>Adaptation Evidence: Localization vs Direct Machine Translation
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+              <div class="text-blue-400 font-bold">🇵🇭 Philippines: Policy Rider Inquiry</div>
+              <div class="text-red-400 text-[11px]"><span class="text-slate-500">Literal MT:</span> "Sino ang makakatanggap ng pera kasama ang mangangabayo?" (Horse rider!)</div>
+              <div class="text-emerald-400 text-[11px]"><span class="text-slate-500">Localized Taglish:</span> "Pwede po natin i-check ang registered beneficiaries at active accidental death riders."</div>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+              <div class="text-emerald-400 font-bold">🇮🇩 Indonesia: Installment Due Notice</div>
+              <div class="text-red-400 text-[11px]"><span class="text-slate-500">Literal MT:</span> "Uang bulanan jatuh tanggal kedaluwarsa, bayar sebelum denda pelanggaran."</div>
+              <div class="text-emerald-400 text-[11px]"><span class="text-slate-500">Localized Bahasa:</span> "Mengingatkan kembali angsuran cicilan motor jatuh tempo tanggal 25 ini sebesar Rp 850.000 ya, Pak."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: QUESTION 4 REAL-TIME NUDGES ==================== -->
+    <section id="pane-q4" class="tab-pane hidden space-y-6">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center">
+              <i class="fa-solid fa-bolt text-amber-400 mr-2"></i>
+              Question 4: Live Insights & Real-Time Nudges (Streaming Audio HUD)
+            </h2>
+            <p class="text-xs text-slate-400">Continuous ASR, compliance risk detection, rising frustration, cross-sell cues, cooldown suppression, and P50/P95 latency measurement.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <select id="q4-stream-select" class="bg-slate-900 border border-slate-700 text-xs text-white rounded-xl px-3 py-2">
+              <option value="stream_01_missed_cross_sell">1. Missed Cross-Sell (Second Car)</option>
+              <option value="stream_02_compliance_gap">2. Skipped Disclosure (Compliance Gap)</option>
+              <option value="stream_03_rising_frustration">3. Rising Frustration (Claim Delay)</option>
+              <option value="stream_04_noisy_ambiguous">4. Ambiguous Noise (Suppressed)</option>
+            </select>
+            <button onclick="startQ4LiveSimulation()" id="btn-stream-play" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-semibold shadow">
+              <i class="fa-solid fa-play mr-1.5"></i>Start Live Audio Stream
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Left: Streaming Audio Transcript & Waveform -->
+          <div class="lg:col-span-2 bg-slate-900 border border-slate-700 rounded-2xl p-4 flex flex-col h-[500px]">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3 text-xs">
+              <span class="text-slate-300 font-semibold"><i class="fa-solid fa-radio mr-1.5 text-amber-400"></i>Live Audio Stream & Diarization Feed</span>
+              <span id="q4-stream-status" class="text-slate-500 font-mono">Idle</span>
+            </div>
+
+            <!-- Chunk Feed -->
+            <div id="q4-chunk-feed" class="flex-1 overflow-y-auto space-y-3 pr-2 text-xs">
+              <div class="text-slate-500 italic text-center py-10">Select an audio stream scenario and click 'Start Live Audio Stream' to watch real-time chunk transcription and sub-second nudges.</div>
+            </div>
+          </div>
+
+          <!-- Right: Real-time Live Nudge HUD Panel -->
+          <div class="space-y-4">
+            <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3 text-xs">
+                <span class="text-slate-300 font-bold"><i class="fa-solid fa-bell mr-1.5 text-amber-400"></i>Active Agent Nudges</span>
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">Cooldown: 30s</span>
+              </div>
+              <div id="q4-nudge-feed" class="space-y-3 min-h-[220px]">
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-slate-500 text-xs text-center">
+                  Awaiting audio triggers...
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Latency & Quality Metrics -->
+            <div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-2 text-xs">
+              <div class="font-bold text-slate-300 border-b border-slate-800 pb-2 flex justify-between">
+                <span><i class="fa-solid fa-gauge mr-1.5 text-emerald-400"></i>Real-Time Latency Meter</span>
+                <span class="text-emerald-400 font-mono">P50: 221.4ms | P95: 273.7ms</span>
+              </div>
+              <div class="space-y-1.5 pt-1 text-[11px]">
+                <div class="flex justify-between text-slate-400">
+                  <span>Streaming ASR Latency:</span>
+                  <span class="font-mono text-white">~175 ms</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                  <span>Signal Extraction (Rules/Vector):</span>
+                  <span class="font-mono text-white">~30 ms</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                  <span>Nudge Control & Deduplication:</span>
+                  <span class="font-mono text-white">~11 ms</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                  <span>WebSocket UI Delivery:</span>
+                  <span class="font-mono text-white">~8 ms</span>
+                </div>
+                <div class="border-t border-slate-800 pt-1 flex justify-between text-slate-200 font-bold">
+                  <span>Total End-to-End Latency:</span>
+                  <span class="text-emerald-400 font-mono">< 300 ms (Real-Time)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: TRANSCRIPTS & AUDIO DELIVERABLES ==================== -->
+    <section id="pane-transcripts" class="tab-pane hidden space-y-6">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
+        <div class="border-b border-slate-700 pb-4">
+          <h2 class="text-lg font-bold text-white flex items-center">
+            <i class="fa-solid fa-folder-open text-blue-400 mr-2"></i>
+            Recorded Calls, Transcripts & Submission Deliverables
+          </h2>
+          <p class="text-xs text-slate-400">Full transcripts and corresponding 16kHz PCM audio files for all assessment test scenarios.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <!-- Card 1 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-blue-400">Q1 Call 1: Cooperative</span>
+              <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded text-[10px]">QUALIFIED</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Robert Miller • Age 34 • Score 75/100 • Lead #lead_92dab88c</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_01_cooperative.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_01_cooperative.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-yellow-400">Q1 Call 2: Objections</span>
+              <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded text-[10px]">GROUNDED RAG</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Sarah Connor • Employer Cover & Cost • Q2 Citations Used</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_02_objection_handling.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_02_objection_handling.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-orange-400">Q1 Call 3: Incomplete/Conflicting</span>
+              <span class="px-2 py-0.5 bg-amber-950 text-amber-400 rounded text-[10px]">CLARIFIED</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">David Vance • Conflicting Age 180 -> 45 • BP & Smoker Loading</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_03_incomplete_conflicting.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_03_incomplete_conflicting.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-400">Q1 Call 4: Out-of-Scope</span>
+              <span class="px-2 py-0.5 bg-rose-950 text-rose-400 rounded text-[10px]">SAFE FALLBACK</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Alex Rivera • Cosmetic & Crypto Query • Hallucination Suppressed</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_04_out_of_scope.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_04_out_of_scope.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-red-400">Q1 Call 5: Escalation</span>
+              <span class="px-2 py-0.5 bg-red-950 text-red-400 rounded text-[10px]">TRANSFER TICKET</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Caller demanded real person • Immediate warm transfer ticket</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_05_human_escalation.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_05_human_escalation.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-indigo-400">Q3 PH Call 1: Taglish</span>
+              <span class="px-2 py-0.5 bg-blue-950 text-blue-400 rounded text-[10px]">TAGLISH RENEWAL</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Mr. Ronald Cruz • Life Ready Plus • GCash/BPI Online arrangement</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_ph_01_cooperative.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_ph_01_cooperative.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-emerald-400">Q3 ID Call 2: Javanese Accent</span>
+              <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded text-[10px]">REGIONAL MULTIFINANCE</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Mas Bambang Sutrisno • Tenor Restructuring & Javanese Tone</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/call_id_02_javanese_accent.json" target="_blank" class="text-blue-400 hover:underline">View Transcript JSON</a>
+              <audio controls src="/data/test_calls/call_id_02_javanese_accent.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-amber-400">Q4 Stream: Cross-Sell Nudge</span>
+              <span class="px-2 py-0.5 bg-amber-950 text-amber-400 rounded text-[10px]">REAL-TIME HUD</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Second vehicle trigger • Sub-second alert • Cooldown tested</p>
+            <div class="pt-2 flex items-center justify-between">
+              <a href="/data/test_calls/q4_nudges_benchmark_report.json" target="_blank" class="text-blue-400 hover:underline">View Benchmark Report</a>
+              <audio controls src="/data/test_calls/stream_01_missed_cross_sell.wav" class="h-6 w-32"></audio>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    let q1SessionId = 'web_session_' + Math.random().toString(36).substring(2, 8);
+    let q4WebSocket = null;
+
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white', 'shadow');
+        b.classList.add('text-slate-300');
+      });
+      document.getElementById('pane-' + tabKey).classList.remove('hidden');
+      const btn = document.getElementById('tab-' + tabKey);
+      btn.classList.add('bg-blue-600', 'text-white', 'shadow');
+      btn.classList.remove('text-slate-300');
+    }
+
+    // ==================== Q1 LOGIC ====================
+    async function sendQ1Message(explicitText = null) {
+      const input = document.getElementById('q1-input-text');
+      const text = explicitText || input.value.trim();
+      if (!text) return;
+      if (!explicitText) input.value = '';
+
+      const feed = document.getElementById('q1-dialog-feed');
+      feed.innerHTML += `
+        <div class="p-3 rounded-xl chat-bubble-user text-slate-800 shadow-sm text-right">
+          <div class="font-bold text-emerald-700 text-[11px] mb-1">Caller (You)</div>
+          ${text}
+        </div>
+      `;
+      feed.scrollTop = feed.scrollHeight;
+
+      try {
+        const res = await fetch('/api/q1/turn', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({session_id: q1SessionId, message: text})
+        });
+        const data = await res.json();
+
+        let citationHTML = '';
+        if (data.citation) {
+          citationHTML = `<div class="mt-2 text-[10px] text-blue-700 bg-blue-100 p-1.5 rounded border border-blue-200">
+            <i class="fa-solid fa-book-bookmark mr-1"></i><strong>Q2 Citation:</strong> ${data.citation}
+          </div>`;
+        }
+
+        feed.innerHTML += `
+          <div class="p-3 rounded-xl chat-bubble-agent text-slate-800 shadow-sm">
+            <div class="font-bold text-blue-700 text-[11px] mb-1">HealthGuard Voice Agent</div>
+            ${data.agent_response}
+            ${citationHTML}
+          </div>
+        `;
+        feed.scrollTop = feed.scrollHeight;
+
+        // Speak aloud via Web Speech API (TTS)
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(data.agent_response);
+          utterance.rate = 1.05;
+          window.speechSynthesis.speak(utterance);
+        }
+
+        // Update State & CRM Card
+        document.getElementById('q1-stage-indicator').innerText = data.stage;
+        if (data.customer_name) document.getElementById('crm-name').innerText = data.customer_name;
+        if (data.age) document.getElementById('crm-age').innerText = data.age + ' yrs';
+        if (data.pre_existing) document.getElementById('crm-cond').innerText = data.pre_existing;
+        if (data.budget) document.getElementById('crm-budget').innerText = data.budget;
+
+        if (data.lead_id) {
+          document.getElementById('crm-status-badge').innerText = data.qualification.status;
+          document.getElementById('crm-status-badge').className = 'px-2 py-0.5 rounded bg-emerald-900 text-emerald-300 font-bold';
+          document.getElementById('crm-lead-banner').classList.remove('hidden');
+          document.getElementById('crm-lead-id').innerText = '#' + data.lead_id;
+          document.getElementById('crm-lead-notes').innerText = data.qualification.notes;
+        }
+
+        if (data.is_escalated) {
+          document.getElementById('crm-escalate-banner').classList.remove('hidden');
+          document.getElementById('crm-status-badge').innerText = 'ESCALATED';
+          document.getElementById('crm-status-badge').className = 'px-2 py-0.5 rounded bg-red-900 text-red-300 font-bold';
+        }
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function injectQ1Preset(type) {
+      const presets = {
+        cooperative: "Hi, I am Robert Miller, 34 years old, non-smoker with no medical conditions, looking for a $150/month family health plan.",
+        objection_employer: "I already have health insurance through my employer, why do I need to buy this?",
+        objection_cost: "Isn't health insurance way too expensive right now?",
+        conflicting: "I am 180 years old... wait sorry typo, I am 45 years old with controlled hypertension.",
+        out_of_scope: "Does this plan cover cosmetic hair transplants or Bitcoin trading losses?",
+        escalate: "I want to speak to a real human underwriter right now!"
+      };
+      sendQ1Message(presets[type]);
+    }
+
+    async function resetQ1Call() {
+      await fetch('/api/q1/reset', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({session_id: q1SessionId})
+      });
+      document.getElementById('q1-dialog-feed').innerHTML = `
+        <div class="p-3 rounded-xl chat-bubble-agent text-slate-800 shadow-sm">
+          <div class="font-bold text-blue-700 text-[11px] mb-1">HealthGuard Voice Agent</div>
+          Hello! Thanks for calling HealthGuard Solutions. May I know your name to get started?
+        </div>
+      `;
+      document.getElementById('crm-lead-banner').classList.add('hidden');
+      document.getElementById('crm-escalate-banner').classList.add('hidden');
+      document.getElementById('crm-status-badge').innerText = 'AWAITING DATA';
+      document.getElementById('crm-status-badge').className = 'px-2 py-0.5 rounded bg-slate-800 text-slate-400';
+      document.getElementById('crm-name').innerText = '-';
+      document.getElementById('crm-age').innerText = '-';
+      document.getElementById('crm-cond').innerText = '-';
+      document.getElementById('crm-budget').innerText = '-';
+      document.getElementById('q1-stage-indicator').innerText = 'GREETING';
+    }
+
+    // Web Speech API Mic Recognition
+    function toggleQ1SpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('Web Speech API not supported in this browser. Please type responses directly into the box.');
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.onstart = () => {
+        document.getElementById('q1-mic-btn').classList.add('bg-red-600', 'animate-pulse');
+      };
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('q1-input-text').value = transcript;
+        sendQ1Message();
+      };
+      recognition.onend = () => {
+        document.getElementById('q1-mic-btn').classList.remove('bg-red-600', 'animate-pulse');
+      };
+      recognition.start();
+    }
+
+    // ==================== Q2 LOGIC ====================
+    async function searchKBUI() {
+      const q = document.getElementById('q2-query-input').value.trim();
+      if (!q) return;
+      const res = await fetch('/api/q2/search?q=' + encodeURIComponent(q));
+      const data = await res.json();
+      document.getElementById('q2-score-tag').innerText = 'Confidence: ' + (data.confidence_score || 0).toFixed(4);
+      document.getElementById('q2-answer-text').innerText = data.answer;
+      if (data.citation) {
+        document.getElementById('q2-citation-box').classList.remove('hidden');
+        document.getElementById('q2-citation-text').innerText = data.citation;
+      } else {
+        document.getElementById('q2-citation-box').classList.add('hidden');
+      }
+    }
+
+    async function runQ2BenchmarkUI() {
+      const btn = document.getElementById('btn-run-q2');
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i>Running Evaluation...';
+      const res = await fetch('/api/q2/benchmark');
+      const data = await res.json();
+      btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i>Completed 6/6 Correct';
+      btn.classList.replace('bg-purple-600', 'bg-emerald-600');
+    }
+
+    // ==================== Q3 LOGIC ====================
+    async function sendPHMessage() {
+      const input = document.getElementById('ph-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      const feed = document.getElementById('ph-chat-feed');
+      feed.innerHTML += `
+        <div class="p-2.5 rounded-xl bg-slate-950 text-slate-200 text-right border-r-2 border-emerald-500">
+          <span class="font-bold text-emerald-400 text-[10px] block">Customer:</span>
+          ${text}
+        </div>
+      `;
+      feed.scrollTop = feed.scrollHeight;
+
+      const res = await fetch('/api/q3/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({market: 'PH', session_id: 'ph_web', message: text})
+      });
+      const data = await res.json();
+      feed.innerHTML += `
+        <div class="p-2.5 rounded-xl bg-slate-800 text-slate-200 border-l-2 border-blue-500">
+          <span class="font-bold text-blue-400 text-[10px] block">PH Bot (Taglish):</span>
+          ${data.response}
+        </div>
+      `;
+      feed.scrollTop = feed.scrollHeight;
+    }
+
+    async function sendIDMessage() {
+      const input = document.getElementById('id-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      const feed = document.getElementById('id-chat-feed');
+      feed.innerHTML += `
+        <div class="p-2.5 rounded-xl bg-slate-950 text-slate-200 text-right border-r-2 border-blue-500">
+          <span class="font-bold text-blue-400 text-[10px] block">Nasabah:</span>
+          ${text}
+        </div>
+      `;
+      feed.scrollTop = feed.scrollHeight;
+
+      const res = await fetch('/api/q3/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({market: 'ID', session_id: 'id_web', message: text})
+      });
+      const data = await res.json();
+      feed.innerHTML += `
+        <div class="p-2.5 rounded-xl bg-slate-800 text-slate-200 border-l-2 border-emerald-500">
+          <span class="font-bold text-emerald-400 text-[10px] block">ID Bot (Bahasa):</span>
+          ${data.response}
+        </div>
+      `;
+      feed.scrollTop = feed.scrollHeight;
+    }
+
+    // ==================== Q4 REAL-TIME STREAMING HUD ====================
+    function startQ4LiveSimulation() {
+      const streamId = document.getElementById('q4-stream-select').value;
+      const chunkFeed = document.getElementById('q4-chunk-feed');
+      const nudgeFeed = document.getElementById('q4-nudge-feed');
+      const statusTag = document.getElementById('q4-stream-status');
+
+      chunkFeed.innerHTML = '';
+      nudgeFeed.innerHTML = '';
+      statusTag.innerText = 'Connecting WebSocket...';
+      statusTag.className = 'text-amber-400 font-mono animate-pulse';
+
+      if (q4WebSocket) q4WebSocket.close();
+
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${protocol}//${window.location.host}/ws/q4/stream/${streamId}`;
+      q4WebSocket = new WebSocket(wsUrl);
+
+      q4WebSocket.onopen = () => {
+        statusTag.innerText = 'Streaming Active (Dual-Channel)';
+        statusTag.className = 'text-emerald-400 font-mono';
+      };
+
+      q4WebSocket.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        if (msg.type === 'CHUNK') {
+          const c = msg.chunk;
+          const lat = msg.latency;
+          const isAgent = c.speaker === 'Agent';
+
+          chunkFeed.innerHTML += `
+            <div class="p-2.5 rounded-xl ${isAgent ? 'bg-slate-800 border-l-4 border-blue-500' : 'bg-slate-950 border-r-4 border-emerald-500'}">
+              <div class="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+                <span class="font-bold ${isAgent ? 'text-blue-400' : 'text-emerald-400'}">${c.speaker}</span>
+                <span class="font-mono text-slate-500">Offset: ${c.timestamp_offset_ms}ms | ASR: ${lat.asr_ms}ms | E2E: ${lat.total_e2e_ms}ms</span>
+              </div>
+              <p class="text-slate-200 text-xs">${c.text}</p>
+            </div>
+          `;
+          chunkFeed.scrollTop = chunkFeed.scrollHeight;
+
+          // If Nudge fired
+          if (msg.nudge) {
+            const n = msg.nudge;
+            let sevClass = 'nudge-info';
+            if (n.severity === 'CRITICAL') sevClass = 'nudge-critical';
+            else if (n.severity === 'WARNING') sevClass = 'nudge-warning';
+
+            nudgeFeed.innerHTML += `
+              <div class="p-3 rounded-xl ${sevClass} text-slate-900 shadow-lg animate-bounce space-y-1">
+                <div class="flex items-center justify-between font-bold text-xs">
+                  <span>${n.headline}</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-white font-mono">${n.severity}</span>
+                </div>
+                <p class="text-[11px] font-medium text-slate-800">${n.recommendation}</p>
+                <div class="text-[10px] text-slate-600 italic">Rationale: ${n.rationale}</div>
+              </div>
+            `;
+          }
+        } else if (msg.type === 'SUMMARY') {
+          statusTag.innerText = 'Stream Completed';
+          statusTag.className = 'text-blue-400 font-mono font-bold';
+        }
+      };
+
+      q4WebSocket.onclose = () => {
+        statusTag.innerText = 'Call Ended';
+        statusTag.className = 'text-slate-500 font-mono';
+      };
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "call_id": "call_id_02_javanese_accent",
+  "market": "Indonesia",
+  "sector": "Multifinance / Consumer Credit",
+  "test_type": "Regional Javanese Accent + Financial Hardship / Tenor Restructuring & Escalation",
+  "caller_name": "Mas Bambang Sutrisno (Solo/Yogyakarta)",
+  "language_mode": "Bahasa Indonesia (Formal & Colloquial + Javanese Regional Tone)",
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Nyuwun sewu, halo sugeng siang."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Sugeng siang Mas Bambang. Nyuwun sewu, kulo saking layanan pembiayaan Astra Multifinance. Leres niki kalian Mas Bambang Sutrisno ingkang mundhut unit motor Beat?",
+      "action": "CONTINUE",
+      "stage": "VERIFY_IDENTITY"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Inggih leres, kulo piyambak Bambang Sutrisno."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Matur nuwun Mas Bambang. Namung ngemutaken kagem angsuran cicilan motor ing wulan niki sebesar Rp 750.000 sampun nyaketi tanggal jatuh tempo tanggal 25 nggih Mas, supados mboten kenging denda.",
+      "action": "CONTINUE",
+      "stage": "DELIVER_INSTALLMENT_INFO"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Aduh Mas, wulan niki rejeki lagi seret sanget. Menawi nyuwun perpanjangan tenor cicilan supados angsuranipun langkung enteng saget mboten nggih?"
+    },
+    {
+      "speaker": "Bot",
+      "text": "Kula mangertosi sanget kondisinipun Mas Bambang. Mboten usah kuwatos, wonten program pemutihan denda utawi perpanjangan tenor cicilan supados angsuran saben wulan langkung enteng. Menawi badhe dipun ajuaken, kula bantu proses nggih Mas?",
+      "action": "CONTINUE",
+      "stage": "OFFER_RESTRUCTURING"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Nggih Mas, menawi saget kulo nyuwun disambungaken kalian supervisor CS pembiayaan supados rembagan langkung cetha."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Nggih Mas, mangga dipun antosi sekedap. Kula sambungaken langsung dateng Petugas Customer Service pembiayaan ingkang tugas dinten niki supados saget dipun bantu tuntas. Matur nuwun nggih.",
+      "action": "ESCALATE_ID",
+      "stage": null
+    }
+  ],
+  "state_summary": {
+    "turn_count": 4,
+    "register": "JAVANESE_POLITE",
+    "stage": "OFFER_RESTRUCTURING"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "call_id": "call_02_objection_handling",
+  "name": "Scenario 2: Grounded Objection Handling",
+  "caller_phone": "+1-555-019-3344",
+  "final_stage": "COMPLETED",
+  "is_escalated": false,
+  "crm_lead_id": "lead_cf306288",
+  "qualification_result": {
+    "status": "QUALIFIED",
+    "score": 75,
+    "loading": 0.0,
+    "notes": "Standard risk profile.; Tobacco user rates apply (ineligible for preferred 12% non-smoker discount)."
+  },
+  "total_turns": 16,
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Hello",
+      "stage": "GREETING",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Hello! Thanks for calling HealthGuard Solutions. May I know your name to get started?",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "I am Sarah Connor",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Nice to meet you, Sarah Connor. To ensure we check the right underwriting plan, could you please tell me your current age?",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "I already have health insurance through my employer, why do I need to buy this?",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "That is a great consideration! However, employer group cover ends if you transition jobs or retire. Having your own personal policy locks in low entry rates and guarantees continuous protection.  Now Sarah Connor, could you tell me your age?",
+      "stage": "KNOWLEDGE_CONSULTATION",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": true,
+      "retrieved_citation": "[Source: sales_enablement_playbook_2026.pdf | Document: 'Objection Handling: Existing Employer Insurance & Cost Concerns' | Record ID: kb_objection_005 | Version: 1.1]",
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "I am 42 years old",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Got it, 42 years old. Next, do you have any pre-existing health conditions such as high blood pressure, diabetes, or any ongoing treatments?",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "Isn't private health insurance too expensive right now?",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "I understand cost is a priority. We offer flexible high-deductible options that lower premiums by up to 35%, along with monthly installment plans so you don't face large lump sums.  Do you currently have any declared pre-existing health conditions or illnesses?",
+      "stage": "KNOWLEDGE_CONSULTATION",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": true,
+      "retrieved_citation": "[Source: sales_enablement_playbook_2026.pdf | Document: 'Objection Handling: Existing Employer Insurance & Cost Concerns' | Record ID: kb_objection_005 | Version: 1.1]",
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "No pre-existing conditions, non-smoker",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Understood, thank you for sharing that. Lastly, what monthly or annual coverage budget did you have in mind?",
+      "stage": "QUALIFYING_BUDGET",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "About $250 a month",
+      "stage": "QUALIFYING_BUDGET",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Thank you, Sarah Connor! Based on our preliminary underwriting criteria, your eligibility status is: QUALIFIED (Score: 75/100). I have created CRM Lead profile #lead_cf306288 for you. A licensed specialist will call you at +1-555-019-3344 with personalized quote proposals. Is there anything else I can help with today?",
+      "stage": "CONFIRMATION",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": "CRM Lead lead_cf306288"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Sounds great, thank you!",
+      "stage": "CONFIRMATION",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Thank you for contacting HealthGuard Solutions. Have a wonderful day!",
+      "stage": "COMPLETED",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    }
+  ]
+}

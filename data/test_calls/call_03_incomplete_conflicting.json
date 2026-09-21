@@ -1,0 +1,161 @@
+{
+  "call_id": "call_03_incomplete_conflicting",
+  "name": "Scenario 3: Incomplete & Conflicting Details",
+  "caller_phone": "+1-555-019-5566",
+  "final_stage": "COMPLETED",
+  "is_escalated": false,
+  "crm_lead_id": "lead_f79bd45b",
+  "qualification_result": {
+    "status": "QUALIFIED_WITH_LOADING",
+    "score": 65,
+    "loading": 0.15,
+    "notes": "Standard 15% premium loading applied for controlled condition.; Tobacco user rates apply (ineligible for preferred 12% non-smoker discount)."
+  },
+  "total_turns": 16,
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Hey",
+      "stage": "GREETING",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Hello! Thanks for calling HealthGuard Solutions. May I know your name to get started?",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "David Vance",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Nice to meet you, David Vance. To ensure we check the right underwriting plan, could you please tell me your current age?",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "I am 180 years old",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "You mentioned 180, which seems unusual. Could you please confirm your actual age?",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "Sorry typo, I am 45 years old",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Got it, 45 years old. Next, do you have any pre-existing health conditions such as high blood pressure, diabetes, or any ongoing treatments?",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "Maybe, not sure, depends",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Underwriting guidelines require us to record diagnosed conditions like hypertension or diabetes. Do you take regular prescription medications for any condition?",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "I have controlled blood pressure, I take daily medication, and I do smoke occasionally",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Understood, thank you for sharing that. Lastly, what monthly or annual coverage budget did you have in mind?",
+      "stage": "QUALIFYING_BUDGET",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "$300 a month",
+      "stage": "QUALIFYING_BUDGET",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Thank you, David Vance! Based on our preliminary underwriting criteria, your eligibility status is: QUALIFIED_WITH_LOADING (Score: 65/100). I have created CRM Lead profile #lead_f79bd45b for you. A licensed specialist will call you at +1-555-019-5566 with personalized quote proposals. Is there anything else I can help with today?",
+      "stage": "CONFIRMATION",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": "CRM Lead lead_f79bd45b"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Thank you",
+      "stage": "CONFIRMATION",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Thank you for contacting HealthGuard Solutions. Have a wonderful day!",
+      "stage": "COMPLETED",
+      "timestamp": "11:24:50",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    }
+  ]
+}

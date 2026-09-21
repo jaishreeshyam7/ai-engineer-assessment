@@ -1,0 +1,143 @@
+{
+  "call_id": "call_04_out_of_scope",
+  "name": "Scenario 4: Out-of-Scope Fallback & Safety",
+  "caller_phone": "+1-555-019-7788",
+  "final_stage": "COMPLETED",
+  "is_escalated": false,
+  "crm_lead_id": "lead_c6d4a27c",
+  "qualification_result": {
+    "status": "QUALIFIED",
+    "score": 85,
+    "loading": 0.0,
+    "notes": "Standard risk profile.; Preferred non-smoker discount applied."
+  },
+  "total_turns": 14,
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Hi",
+      "stage": "GREETING",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Hello! Thanks for calling HealthGuard Solutions. May I know your name to get started?",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "Alex Rivera",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Nice to meet you, Alex Rivera. To ensure we check the right underwriting plan, could you please tell me your current age?",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "Does this health insurance cover cosmetic nose jobs or Bitcoin trading losses?",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "I checked our verified database: that item (such as elective cosmetic procedures or investment risks) is not covered under our medical policies. We only cover medically necessary hospitalization and treatments. Now Alex Rivera, would you like to continue checking your eligible medical coverage?",
+      "stage": "KNOWLEDGE_CONSULTATION",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": true,
+      "retrieved_citation": null,
+      "notes": "Fallback triggered: Query out of scope or excluded from policy database."
+    },
+    {
+      "speaker": "Customer",
+      "text": "I am 29 years old",
+      "stage": "QUALIFYING_AGE",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Got it, 29 years old. Next, do you have any pre-existing health conditions such as high blood pressure, diabetes, or any ongoing treatments?",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "None at all",
+      "stage": "QUALIFYING_HEALTH",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Understood, thank you for sharing that. Lastly, what monthly or annual coverage budget did you have in mind?",
+      "stage": "QUALIFYING_BUDGET",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "Around $100 a month",
+      "stage": "QUALIFYING_BUDGET",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Thank you, Alex Rivera! Based on our preliminary underwriting criteria, your eligibility status is: QUALIFIED (Score: 85/100). I have created CRM Lead profile #lead_c6d4a27c for you. A licensed specialist will call you at +1-555-019-7788 with personalized quote proposals. Is there anything else I can help with today?",
+      "stage": "CONFIRMATION",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": "CRM Lead lead_c6d4a27c"
+    },
+    {
+      "speaker": "Customer",
+      "text": "All good",
+      "stage": "CONFIRMATION",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Thank you for contacting HealthGuard Solutions. Have a wonderful day!",
+      "stage": "COMPLETED",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    }
+  ]
+}

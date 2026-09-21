@@ -1,0 +1,48 @@
+{
+  "call_id": "call_05_human_escalation",
+  "name": "Scenario 5: Human Assistance Request",
+  "caller_phone": "+1-555-019-9900",
+  "final_stage": "HUMAN_ESCALATION",
+  "is_escalated": true,
+  "crm_lead_id": null,
+  "qualification_result": null,
+  "total_turns": 4,
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Hello, I need help",
+      "stage": "GREETING",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "Hello! Thanks for calling HealthGuard Solutions. May I know your name to get started?",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Customer",
+      "text": "I don't want to talk to an automated machine, please connect me to a real human representative right now!",
+      "stage": "COLLECTING_NAME",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": null
+    },
+    {
+      "speaker": "Agent",
+      "text": "I completely understand. I have initiated a warm transfer to one of our licensed senior underwriters. Your reference ticket is esc_0e4ddaf9. Please stay on the line while I connect you.",
+      "stage": "HUMAN_ESCALATION",
+      "timestamp": "11:24:51",
+      "kb_retrieval_used": false,
+      "retrieved_citation": null,
+      "notes": "Escalation ticket esc_0e4ddaf9"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "call_id": "call_ph_01_cooperative",
+  "market": "Philippines",
+  "sector": "Life Insurance / Bancassurance",
+  "test_type": "Cooperative Customer + Mixed English/Finance Terms",
+  "caller_name": "Mr. Ronald Cruz",
+  "language_mode": "Taglish (Tagalog-English code-switching)",
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Hello po, magandang araw."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Magandang araw po! Tumatawag po ako mula sa BPI-AIA Bancassurance Customer Care. Ako po ba ay nakikipag-usap kay Mr. Ronald Cruz?",
+      "action": "CONTINUE",
+      "stage": "VERIFY_IDENTITY"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Opo, ako nga po si Ronald Cruz."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Salamat po, Sir Ronald. Tumatawag po kami para sa inyong Life Ready Plus policy. Ang quarterly premium po ninyo na ₱4,500 ay due na po sa darating na March 25 para manatiling active ang inyong coverage.",
+      "action": "CONTINUE",
+      "stage": "DELIVER_PURPOSE"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Ah opo, due na pala. May kasama po ba itong critical illness rider at sino po ang primary beneficiary?"
+    },
+    {
+      "speaker": "Bot",
+      "text": "Opo, Sir. Sa inyong policy record, covered po kayo ng ₱1,000,000 basic life benefit plus may Accidental Death & Dismemberment rider po kayo. Ang inyo pong misis ang registered primary beneficiary.",
+      "action": "CONTINUE",
+      "stage": "ANSWER_COVERAGE"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Okay po, paano po ba ang pinakamadaling paraan para bayaran 'to?"
+    },
+    {
+      "speaker": "Bot",
+      "text": "Maraming salamat po sa inyong tiwala, Sir Ronald! Na-send ko na po ang payment reference at branch referral details sa inyong registered mobile number. Mag-ingat po kayo at magandang araw po!",
+      "action": "CONTINUE",
+      "stage": "CLOSING"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Sige po, paki-send na lang po ng payment link sa number ko. Maraming salamat po!"
+    },
+    {
+      "speaker": "Bot",
+      "text": "Pasensya na po, Sir, medyo humina po ang linya. Tungkol po ba ito sa inyong premium payment o gusto niyo po bang mag-inquire tungkol sa inyong policy riders?",
+      "action": "CONTINUE",
+      "stage": "CLOSING"
+    }
+  ],
+  "state_summary": {
+    "turn_count": 5,
+    "stage": "CLOSING"
+  }
+}

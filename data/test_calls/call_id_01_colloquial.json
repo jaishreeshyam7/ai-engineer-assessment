@@ -1,0 +1,55 @@
+{
+  "call_id": "call_id_01_colloquial",
+  "market": "Indonesia",
+  "sector": "Multifinance / Consumer Credit",
+  "test_type": "Colloquial Indonesian Speech + Payment Channel Query",
+  "caller_name": "Pak Budi Prasetyo",
+  "language_mode": "Bahasa Indonesia (Formal & Colloquial + Javanese Regional Tone)",
+  "dialog": [
+    {
+      "speaker": "Customer",
+      "text": "Halo, selamat siang."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Selamat siang, perkenalkan saya dari Customer Support Multifinance Nusantara. Apakah benar saya terhubung dengan Bapak Budi Prasetyo?",
+      "action": "CONTINUE",
+      "stage": "VERIFY_IDENTITY"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Iya betul, saya sendiri Budi Prasetyo."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Terima kasih, Pak Budi. Kami ingin menginfokan bahwa cicilan angsuran ke-8 pembiayaan motor sebesar Rp 820.000 akan jatuh tempo pada tanggal 25 bulan ini. Apakah sudah ada rencana pembayaran?",
+      "action": "CONTINUE",
+      "stage": "DELIVER_INSTALLMENT_INFO"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Oh iya, udah inget kok. Mau tanya nomor rekening BCA Virtual Account buat bayar cicilan angsuran motornya dong."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Untuk pembayaran sangat mudah, Pak. Bisa melalui transfer BCA Virtual Account dengan nomor kontrak Bapak, atau langsung lewat kasir Indomaret dan Alfamart terdekat. Apakah ingin kami kirimkan SMS kode pembayarannya?",
+      "action": "CONTINUE",
+      "stage": "PAYMENT_METHOD"
+    },
+    {
+      "speaker": "Customer",
+      "text": "Boleh, tolong dikirim via SMS ya kodenya. Makasih banyak Mas/Mbak."
+    },
+    {
+      "speaker": "Bot",
+      "text": "Matur nuwun sanget Mas Bambang kagem wekdalipun. Informasi rincian cicilan sampun kula kirim lewat SMS. Sugeng siang lan mugi-mugi rejekinipun lancar sedaya nggih Mas.",
+      "action": "CONTINUE",
+      "stage": "CLOSING"
+    }
+  ],
+  "state_summary": {
+    "turn_count": 4,
+    "stage": "CLOSING",
+    "register": "JAVANESE_POLITE"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "scenario_results": [
+    {
+      "stream_id": "stream_01_missed_cross_sell",
+      "name": "Scenario 1: Missed Cross-Sell Opportunity",
+      "total_chunks": 5,
+      "nudges_fired_count": 1,
+      "nudges": [
+        {
+          "nudge_id": "ndg_b0137b",
+          "signal_type": "MISSED_CROSS_SELL",
+          "severity": "INFO",
+          "headline": "\ud83d\udca1 CROSS-SELL OPPORTUNITY: Second Vehicle mentioned",
+          "recommendation": "Customer mentioned 'second car'. Offer our Multi-Vehicle / Family Umbrella bundle for 15% combined savings.",
+          "rationale": "Customer showed organic buying intent for additional insurable assets.",
+          "priority": 3,
+          "timestamp_offset_ms": 6100,
+          "cooldown_key": "MISSED_CROSS_SELL",
+          "expires_in_seconds": 45,
+          "is_suppressed": false,
+          "suppression_reason": null
+        }
+      ]
+    },
+    {
+      "stream_id": "stream_02_compliance_gap",
+      "name": "Scenario 2: Skipped Disclosure (Compliance Gap)",
+      "total_chunks": 4,
+      "nudges_fired_count": 1,
+      "nudges": [
+        {
+          "nudge_id": "ndg_7daaa6",
+          "signal_type": "COMPLIANCE_GAP",
+          "severity": "CRITICAL",
+          "headline": "\u26a0\ufe0f COMPLIANCE RISK: Recording Disclosure Missing",
+          "recommendation": "Read mandatory statement immediately: 'Please note this call is recorded for quality and compliance purposes.'",
+          "rationale": "Regulatory mandate: Call recording disclosure must be given within the first two agent speaking turns.",
+          "priority": 1,
+          "timestamp_offset_ms": 4400,
+          "cooldown_key": "COMPLIANCE_GAP",
+          "expires_in_seconds": 30,
+          "is_suppressed": false,
+          "suppression_reason": null
+        }
+      ]
+    },
+    {
+      "stream_id": "stream_03_rising_frustration",
+      "name": "Scenario 3: Rising Frustration De-escalation",
+      "total_chunks": 5,
+      "nudges_fired_count": 1,
+      "nudges": [
+        {
+          "nudge_id": "ndg_e9db7c",
+          "signal_type": "RISING_FRUSTRATION",
+          "severity": "WARNING",
+          "headline": "\ud83d\udea8 CUSTOMER FRUSTRATION DETECTED",
+          "recommendation": "Pause sales script. Acknowledge caller's delay/frustration: 'I sincerely apologize for the runaround you experienced; let me take personal ownership of this.'",
+          "rationale": "Elevated sentiment risk. Failure to de-escalate will trigger churn or formal complaint.",
+          "priority": 2,
+          "timestamp_offset_ms": 2500,
+          "cooldown_key": "RISING_FRUSTRATION",
+          "expires_in_seconds": 40,
+          "is_suppressed": false,
+          "suppression_reason": null
+        }
+      ]
+    },
+    {
+      "stream_id": "stream_04_noisy_ambiguous",
+      "name": "Scenario 4: Noisy & Ambiguous Stream (False Positive Suppression)",
+      "total_chunks": 5,
+      "nudges_fired_count": 0,
+      "nudges": []
+    }
+  ],
+  "latency_statistics": {
+    "total_chunks_processed": 19,
+    "stages": {
+      "asr_streaming_latency": {
+        "mean": 167.11,
+        "p50": 166.25,
+        "p90": 190.99,
+        "p95": 198.68,
+        "p99": 200.47,
+        "max": 200.92
+      },
+      "signal_extraction_latency": {
+        "mean": 30.05,
+        "p50": 30.4,
+        "p90": 38.09,
+        "p95": 38.34,
+        "p99": 39.81,
+        "max": 40.18
+      },
+      "nudge_generation_latency": {
+        "mean": 10.58,
+        "p50": 0.0,
+        "p90": 40.08,
+        "p95": 54.06,
+        "p99": 81.13,
+        "max": 87.9
+      },
+      "ui_delivery_latency": {
+        "mean": 7.69,
+        "p50": 7.41,
+        "p90": 10.39,
+        "p95": 10.56,
+        "p99": 11.3,
+        "max": 11.48
+      }
+    },
+    "end_to_end_latency": {
+      "mean": 215.44,
+      "p50": 213.89,
+      "p90": 250.33,
+      "p95": 256.57,
+      "p99": 270.78,
+      "max": 274.33
+    }
+  },
+  "false_positive_analysis": {
+    "total_signals_detected": 5,
+    "nudges_dispatched": 3,
+    "signals_suppressed_as_noise_or_duplicate": 2,
+    "suppression_ratio": "40.0%",
+    "suppressed_reasons": [
+      {
+        "signal_id": "sig_47e0d0",
+        "type": "MISSED_CROSS_SELL",
+        "confidence": 0.91,
+        "reason": "COOLDOWN_ACTIVE: 0ms since last nudge (min 30000ms)",
+        "timestamp_ms": 6100
+      },
+      {
+        "signal_id": "sig_040f1c",
+        "type": "RISING_FRUSTRATION",
+        "confidence": 0.95,
+        "reason": "COOLDOWN_ACTIVE: 5000ms since last nudge (min 30000ms)",
+        "timestamp_ms": 7500
+      }
+    ]
+  }
+}
