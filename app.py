@@ -51,7 +51,7 @@ web_id_sessions: Dict[str, Any] = {}
 # ----------------- WEB PAGES -----------------
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="index.html")
 
 # ----------------- QUESTION 1 API -----------------
 class CallTurnRequest(BaseModel):
@@ -194,4 +194,6 @@ async def stream_q4_call(websocket: WebSocket, stream_id: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=False)
+    import os
+    port = int(os.environ.get("PORT", 8050))
+    uvicorn.run("app:app", host="127.0.0.1", port=port, reload=False)
